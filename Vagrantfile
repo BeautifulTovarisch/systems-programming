@@ -15,6 +15,8 @@ Vagrant.configure("2") do |config|
   config.vm.box = "bento/fedora-40"
   config.vm.box_version = "202404.23.0"
 
+  config.vm.provision "gcc", type: "shell", privileged: true, inline: "dnf install -y gcc"
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
