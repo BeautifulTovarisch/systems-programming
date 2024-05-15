@@ -15,7 +15,23 @@ Vagrant.configure("2") do |config|
   config.vm.box = "bento/fedora-40"
   config.vm.box_version = "202404.23.0"
 
-  config.vm.provision "gcc", type: "shell", privileged: true, inline: "dnf install -y gcc"
+  config.vm.provision "toolchain", type: "shell", privileged: true, inline: <<-TOOL
+  dnf install -y git \
+    gcc \
+    valgrind \
+    clang-tools-extra
+  TOOL
+
+  config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
+
+  config.vm.provision "pre-commit", type: "shell", privileged: false, inline: <<-PRECOMMIT
+    python3 -m ensurepip --upgrade
+    python3 -m pip install --upgrade pip
+    pip3 install pre-commit
+
+    cd /vagrant
+    pre-commit install
+  PRECOMMIT
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
