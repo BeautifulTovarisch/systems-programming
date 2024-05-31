@@ -41,7 +41,7 @@ int main() {
   show_float(f);
   show_pointer(p);
 
-  byte_pointer valp = (byte_pointer) &x;
+  byte_pointer valp = (byte_pointer)&x;
 
   show_bytes(valp, 1);
   show_bytes(valp, 2);
