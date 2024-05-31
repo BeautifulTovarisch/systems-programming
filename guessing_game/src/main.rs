@@ -1,7 +1,7 @@
-use std::cmp::Ordering::{Equal, Greater, Less};
 /// Guessing Game
 ///
 /// This small program prompts the user to input a number.
+use std::cmp::Ordering::{Equal, Greater, Less};
 use std::io;
 use std::time::{SystemTime, UNIX_EPOCH};
 
