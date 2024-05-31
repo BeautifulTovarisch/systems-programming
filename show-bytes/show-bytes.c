@@ -33,11 +33,17 @@ void show_float(float x) { show_bytes((byte_pointer)&x, sizeof(float)); }
 void show_pointer(void *p) { show_bytes((byte_pointer)&p, sizeof(void *)); }
 
 int main() {
-  int x = 10;
+  int x = 0x87654321;
   int *p = &x;
   float f = (float)x;
 
   show_int(x);
   show_float(f);
   show_pointer(p);
+
+  byte_pointer valp = (byte_pointer) &x;
+
+  show_bytes(valp, 1);
+  show_bytes(valp, 2);
+  show_bytes(valp, 3);
 }

@@ -22,15 +22,16 @@ Vagrant.configure("2") do |config|
     clang-tools-extra
   TOOL
 
+  config.vm.provision "rust", type: "shell", privileged: false, inline: <<-RUST
+  curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
+  RUST
+
   config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
 
   config.vm.provision "pre-commit", type: "shell", privileged: false, inline: <<-PRECOMMIT
     python3 -m ensurepip --upgrade
     python3 -m pip install --upgrade pip
     pip3 install pre-commit
-
-    cd /vagrant
-    pre-commit install
   PRECOMMIT
 
   # Disable automatic box update checking. If you disable this, then
