@@ -9,7 +9,7 @@
 #include <unistd.h>
 
 int main(int argc, char *argv[]) {
-  printf("Hello from: (pid:%d)\n", (int) getpid());
+  printf("Hello from: (pid:%d)\n", (int)getpid());
 
   // c_pid - This will be 0 when in the child process's execution context
   int c_pid = fork();
@@ -21,9 +21,10 @@ int main(int argc, char *argv[]) {
   }
 
   if (c_pid == 0) {
-    printf("Hello from the child: (pid:%d)\n", (int) getpid());
+    printf("Hello from the child: (pid:%d)\n", (int)getpid());
   } else {
-    printf("Hello from the parent: (pid:%d) of child: (pid:%d)\n", (int) getpid(), c_pid);
+    printf("Hello from the parent: (pid:%d) of child: (pid:%d)\n",
+           (int)getpid(), c_pid);
   }
 
   return 0;

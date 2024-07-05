@@ -5,8 +5,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <sys/wait.h>
+#include <unistd.h>
 
 int main(int argc, char *argv[]) {
   int cpid = fork();
@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
   // The child will run word count on this source file using exec()
   if (cpid == 0) {
-    printf("Initiating wordcount (pid:%d)\n", (int) getpid());
+    printf("Initiating wordcount (pid:%d)\n", (int)getpid());
     char *args[3] = {"wc", "kitchen-sink.c", NULL};
 
     execvp(args[0], args);

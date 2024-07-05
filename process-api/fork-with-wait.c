@@ -6,8 +6,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <sys/wait.h>
+#include <unistd.h>
 
 int main(int argc, char *argv[]) {
   int p = getpid();
@@ -21,11 +21,12 @@ int main(int argc, char *argv[]) {
   }
 
   if (cpid == 0) {
-    printf("I am the child: (pid:%d)\n", (int) getpid());
+    printf("I am the child: (pid:%d)\n", (int)getpid());
   } else {
     // Wait for the child to finish its task first.
     int ret = wait(NULL);
-    printf("I, (pid:%d), am the parent of (pid:%d), also known as (wait:%d)\n", p, cpid, ret);
+    printf("I, (pid:%d), am the parent of (pid:%d), also known as (wait:%d)\n",
+           p, cpid, ret);
   }
 
   return 0;
