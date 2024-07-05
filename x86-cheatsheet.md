@@ -32,6 +32,7 @@ A simple table annotating IA32/x86 registers and their function.
 - **Imm** - A constant value
 
 |Type     |Form            |Operand Value              |Name               |
+|---------|----------------|---------------------------|-------------------|
 |Immediate|$Imm            |Imm                        |Immediate          |
 |Register |r_a             |R[r_a]                     |Register           |
 |Memory   |Imm             |M[Imm]                     |Absolute           |
