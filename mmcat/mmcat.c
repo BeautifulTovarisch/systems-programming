@@ -47,5 +47,8 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
+  munmap(bufp, size);
+  close(fd);
+
   return 0;
 }
