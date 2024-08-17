@@ -35,9 +35,12 @@ typedef struct cmd {
 
 // trimspaces advances [buf] past any leading spaces (' ').
 void trimspaces(char *buf) {
-  while (*buf && (*buf == ' ')) {
-    *buf++;
+  char *b = buf;
+  while (*b && (*b == ' ')) {
+    b++;
   }
+
+  *buf = *b;
 }
 
 void print_args(int argc, char *argv[]) {
@@ -73,7 +76,7 @@ struct cmd *parseline(char *buf) {
   //
   // effectively fencing each argument as [buf] is processed.
   char *delim;
-  while (delim = strchr(buf, ' ')) {
+  while ((delim = strchr(buf, ' '))) {
     argv[argc++] = buf;
 
     // Set delimiter to NULL and advance [buf] 1 character past.
@@ -86,6 +89,8 @@ struct cmd *parseline(char *buf) {
   // Terminate argument list
   argv[argc] = NULL;
 
+  print_args(argc, argv);
+
   // Check the final argument for a single ampersand '&' indicating whether the
   // program should be run as a background job.
   //
@@ -93,9 +98,9 @@ struct cmd *parseline(char *buf) {
   //  argument1 argument2 &
   //                    ^
   //                    arguments trimmed to this point, job run in background
-  if (command->bg = (*argv[argc - 1] == '&')) {
+  if ((command->bg = (*argv[argc - 1] == '&'))) {
     // Terminate just before the '&'
-    argv[--argc] == NULL;
+    argv[--argc] = NULL;
   }
 
   command->argc = argc;

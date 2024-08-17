@@ -15,6 +15,13 @@ Vagrant.configure("2") do |config|
   config.vm.box = "bento/fedora-40"
   config.vm.box_version = "202404.23.0"
 
+  config.vm.provision "file", source: "~/.vimrc", destination: ".vimrc"
+  config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
+
+  config.vm.provision "tools", type: "shell", privileged: false, inline: <<-TOOLS
+    sudo dnf install -y git tmux
+  TOOLS
+
   config.vm.provision "toolchain", type: "shell", privileged: true, inline: <<-TOOL
   dnf install -y git \
     gcc \
@@ -25,8 +32,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "rust", type: "shell", privileged: false, inline: <<-RUST
   curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
   RUST
-
-  config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
 
   config.vm.provision "pre-commit", type: "shell", privileged: false, inline: <<-PRECOMMIT
     python3 -m ensurepip --upgrade
