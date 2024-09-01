@@ -9,6 +9,9 @@
 #ifndef SOCKET_HELPER_H
 #define SOCKET_HELPER_H
 
+// LISTENQ defines the queue size provided to listen()
+#define LISTENQ (1 << 10)
+
 // TODO: Figure out how to accurately document this
 #define MAXLINE (1 << 13)
 

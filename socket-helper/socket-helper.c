@@ -81,6 +81,11 @@ int open_listenfd(char *port) {
     if (bind(listenfd, p->ai_addr, p->ai_addrlen) == 0) {
       freeaddrinfo(addrlist);
 
+      // Prepare listenfd for listening as server.
+      if (listen(listenfd, LISTENQ) < 0) {
+        return -1;
+      }
+
       return listenfd;
     }
 

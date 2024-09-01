@@ -15,9 +15,9 @@ c99 -Wall -c rio.c
 # Archive the object file 'rio.o'
 ar rcs rio.a rio.o
 
-# Install to /usr/local/lib with appropriate permission
-mkdir -p /usr/local/lib/rio
-install -m 0644 rio.a /usr/local/lib/rio/
+# Install to /usr/local/* with appropriate permission
+install -m 0644 rio.a /usr/local/lib/
+install -m 0644 rio.h /usr/local/include
 
 # Cleanup
 rm *.a *.o
