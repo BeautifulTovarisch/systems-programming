@@ -51,11 +51,11 @@ void *pdot(void *vargp) {
   return (void *)0;
 }
 
-// sequential implementation. This is valuable to compare against the parallel
+// Sequential implementation. This is valuable to compare against the parallel
 // implementation, pdot.
 long sdot(size_t n, long u[n], long v[n]) { return dot(n, u, v); }
 
-// read the provided length. This function will exit if an invalid argument is
+// Read the provided length. This function will exit if an invalid argument is
 // given.
 size_t readlen(char *length) {
   char *end;
@@ -80,9 +80,8 @@ size_t readlen(char *length) {
 // a seed for this program to make debugging easier, but one can be provided if
 // the programmer would like an extra challenge. See srand().
 void randomize(size_t n, long vec[n]) {
-  for (size_t i = 0; i < n; i++) {
+  for (size_t i = 0; i < n; i++)
     vec[i] = (rand() % 10) + 1;
-  }
 }
 
 void pthread_error(int code) {
@@ -131,14 +130,12 @@ long compute(size_t length, long *u, long *v) {
   }
 
   // Wait for all threads to finish.
-  for (size_t i = 0; i < nthreads; i++) {
+  for (size_t i = 0; i < nthreads; i++)
     pthread_error(pthread_join(threads[i], (void *)0));
-  }
 
   long sum = 0;
-  for (size_t i = 0; i < nthreads; i++) {
+  for (size_t i = 0; i < nthreads; i++)
     sum += args[i].res;
-  }
 
   // This is the index of the first unprocessed element. If length is a multiple
   // of PSIZE, [rest] will equal [length], and the loop guard below will fail.
@@ -147,9 +144,8 @@ long compute(size_t length, long *u, long *v) {
   size_t rest = length - (length % PSIZE);
 
   // Process remaining elements.
-  for (size_t i = rest; i < length; i++) {
+  for (size_t i = rest; i < length; i++)
     sum += u[i] * v[i];
-  }
 
   free(args);
   free(threads);
@@ -170,7 +166,7 @@ int main(int argc, char *argv[argc]) {
   long *v = create_vector(length);
 
   if (!(u && v)) {
-    fprintf(stderr, "failed to allocate vectors error: %s\n", strerror(errno));
+    fprintf(stderr, "failed to allocate vectors: %s\n", strerror(errno));
 
     return EXIT_FAILURE;
   }
