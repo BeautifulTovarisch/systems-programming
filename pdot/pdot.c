@@ -141,12 +141,12 @@ long compute(size_t length, long *u, long *v) {
   }
 
   // This is the index of the first unprocessed element. If length is a multiple
-  // of 8, this value will be length, and the loop guard below will immediately
-  // fail.
+  // of PSIZE, [rest] will equal [length], and the loop guard below will fail.
   //
   // This is either somewhat clever or profoundly stupid.
   size_t rest = length - (length % PSIZE);
 
+  // Process remaining elements.
   for (size_t i = rest; i < length; i++) {
     sum += u[i] * v[i];
   }
