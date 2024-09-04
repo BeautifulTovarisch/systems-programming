@@ -38,9 +38,9 @@ long dot(size_t n, long u[n], long v[n]) {
   return sum;
 }
 
-// This thread handler accepts a structure containing an index and pointer to
-// each vector. The function computes its portion of the dot product and stores
-// the value in the shared results array.
+// pdot accepts a struct with the appropriate section of each vector it is meant
+// to handle. The result of the computation is stored in the input struct for
+// later aggregation.
 void *pdot(void *vargp) {
   pdot_arg *arg = (pdot_arg *)vargp;
 
@@ -51,7 +51,9 @@ void *pdot(void *vargp) {
   return (void *)0;
 }
 
-long seqdot(size_t n, long u[n], long v[n]) { return dot(n, u, v); }
+// sequential implementation. This is valuable to compare against the parallel
+// implementation, pdot.
+long sdot(size_t n, long u[n], long v[n]) { return dot(n, u, v); }
 
 // read the provided length. This function will exit if an invalid argument is
 // given.
