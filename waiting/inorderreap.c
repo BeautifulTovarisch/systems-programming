@@ -33,7 +33,7 @@ int main() {
       return 1;
     }
 
-    pid_list[i++] = cpid;
+    pid_list[i] = cpid;
 
     if (cpid == 0) {
       exit(100 + i);
